@@ -1,0 +1,524 @@
+.calendarWrap {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  background-color: $white;
+  box-shadow: 0px 3px 18px 3px rgba(119, 92, 61, 0.17);
+  z-index: 9999;
+
+  @include media-size(desktop) {
+    position: relative;
+    bottom: auto;
+    box-shadow: 0px 3px 18px 3px rgba(119, 92, 61, 0);
+  }
+
+  .booking-wrap {
+    >.col {
+      padding: 0px;
+    }
+  }
+
+  .booking-bar {
+    .logo {
+      display: none;
+
+      @include media-size(desktop) {
+        display: block;
+      }
+    }
+
+    i.bi {
+      pointer-events: none;
+    }
+
+    .booking-wrap {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 15px 0px 15px;
+
+      @include media-size(deskop) {
+        padding: 10px 0px 0px 0px;
+
+      }
+
+      .booking-room {
+        display: flex;
+        justify-content: flex-start;
+        width: 100%;
+        align-items: left;
+        position: relative;
+
+        @include media-size(desktop) {
+          justify-content: flex-end;
+          align-items: center;
+          flex-flow: nowrap;
+        }
+
+        >div {
+          margin: 10px 0px;
+
+          &::after {
+            background-color: transparent;
+          }
+
+          @include media-size(desktop) {
+            margin: 0px 30px 0px 0px;
+
+            &::after {
+              background-color: $gray300;
+            }
+          }
+        }
+      }
+    }
+
+    .logo {
+      max-width: 150px;
+    }
+
+    label {
+      font-family: $font-avenir;
+      @include font-size($font-size-11);
+      line-height: 100%;
+
+      text-transform: uppercase;
+      color: $gray500;
+      display: block;
+
+      @include media-size(desktop) {
+        line-height: 120%;
+        @include font-size($font-size-12);
+      }
+    }
+
+    input {
+      border: none !important;
+
+      &.num-room-guess {
+        width: 30px;
+      }
+
+      &:focus,
+      &:focus-visible {
+        outline: none;
+      }
+    }
+
+    .check-in-out {
+      max-width: 192px;
+      display: flex;
+      align-items: center;
+
+      input {
+        max-width: 100px;
+        cursor: pointer;
+        padding-left: 0px;
+      }
+
+      label {
+        text-align: left;
+      }
+    }
+
+    .room {
+      max-width: 90px;
+
+      label {
+        text-align: center;
+      }
+    }
+
+    .check-in-out,
+    .room {
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        right: -15px;
+        top: 0px;
+        width: 1px;
+        height: 100%;
+        background-color: $gray300;
+      }
+    }
+
+    .check-in {
+      position: relative;
+      margin-right: 10px;
+
+      &::after {
+        position: absolute;
+        right: 0px;
+        content: "-";
+        top: calc(50% - 8px);
+
+        @include media-size(desktop) {
+          top: calc(50% - 5px);
+        }
+      }
+    }
+
+    .icon-calendar {
+      margin-top: 10px;
+      margin-left: -10px;
+      line-height: 100%;
+
+      @include media-size(desktop) {
+        margin-top: -5px;
+        margin-left: 0px;
+      }
+    }
+
+    .icon-btn,
+    .icon-calendar {
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      @include transition(all);
+      color: $black;
+
+      &:not(.disabled):focus-visible,
+      &:not(.disabled):focus,
+      &:not(.disabled):hover,
+      &:not(.disabled):active,
+      &:not(.disabled):visited {
+        color: $black;
+      }
+
+      &:not(.disabled):hover {
+        transform: scale(1.04);
+      }
+
+      &.disabled {
+        color: $gray400;
+        cursor: not-allowed;
+      }
+    }
+
+    .room,
+    .guess {
+      text-align: center;
+
+      input {
+        max-width: 30px;
+        text-align: center;
+      }
+    }
+
+    .btn.check-availability {
+      @include font-size($font-size-12);
+      min-width: 0px;
+      position: absolute;
+      right: -10px;
+      top: 0px;
+      width: 140px;
+      max-width: calc(100% - 190px);
+
+      @include media-size(desktop) {
+        position: relative;
+        width: auto;
+        right: auto;
+        top: auto;
+        max-width: 500px;
+      }
+    }
+
+    .icon-btn {
+      padding: 0px 3px;
+
+      &.disabled {
+        pointer-events: none !important;
+      }
+    }
+  }
+
+  .date-picker {
+    position: relative;
+    z-index: 1;
+    height: auto !important;
+
+    @include media-size(desktop) {
+      position: fixed;
+      top: 105px;
+      left: 0px;
+      z-index: 9999;
+      background-color: rgba(0, 0, 0, 0.6);
+      right: -150px;
+    }
+
+    >.container {
+      background-color: $white;
+      padding: 10px 25px 10px 25px;
+      box-shadow: 0px 1px 18px 3px rgba(119, 92, 61, 0.05);
+      border-radius: 0px 0px 8px;
+      max-width: 750px !important;
+      position: relative;
+      text-align: center;
+      margin-top: 0px;
+
+      @include media-size(desktop) {
+        padding: 10px 25px 30px 25px;
+      }
+
+      .drDateRangePickerWrapper {
+        display: block;
+
+        @include media-size(desktop) {
+          display: inline-flex;
+        }
+      }
+
+      .rdrMonthAndYearWrapper {
+        position: absolute;
+        width: 100%;
+        top: 7px;
+        left: 0px;
+
+        @include media-size(desktop) {
+          width: calc(100% - 40px);
+          top: 30px;
+          left: 20px;
+        }
+
+        button {
+          background-color: transparent;
+          @include transition(all);
+
+          i {
+            pointer-events: none;
+          }
+
+          &:hover {
+            background-color: $gray200;
+            border-radius: 50%;
+          }
+        }
+
+        .rdrNextPrevButton,
+        .rdrNextButton {
+          position: relative;
+          width: 25px;
+          height: 25px;
+
+          i {
+            display: none;
+          }
+
+          &:after {
+            width: 100%;
+            height: 100%;
+            content: '';
+            background: url('/images/left-arrow.svg') no-repeat center center;
+            background-size: cover;
+            position: absolute;
+            top: 0px;
+            right: 0px;
+          }
+        }
+
+        .rdrNextButton {
+          &:after {
+            transform: rotate(180deg);
+          }
+        }
+      }
+
+      .rdrMonths {
+        width: 100%;
+        align-items: center;
+        flex-flow: column;
+
+        @include media-size(desktop) {
+          flex-flow: row;
+        }
+
+        .rdrMonth {
+          width: 15em;
+          padding: 0 0 0.5em 0;
+
+          @include media-size(desktop) {
+            width: 25em;
+            padding: 0 0.3em 0.5em 0;
+
+            &:first-child {
+              padding-right: 20px;
+            }
+          }
+        }
+
+        .rdrDay {
+          line-height: 100%;
+          height: 2.3em;
+          @include font-size($font-size-16);
+          font-family: $font-avenir-bold;
+
+          @include media-size(desktop) {
+            height: 2.7em;
+            @include font-size($font-size-18);
+          }
+        }
+      }
+
+      .rdrCalendarWrapper {
+        width: 100%;
+      }
+
+      .rdrWeekDay {
+        @include font-size($font-size-12);
+        color: $gray400;
+      }
+
+      .rdrDateRangePickerWrapper {
+        margin-top: 30px;
+        margin-bottom: 10px;
+        width: 100%;
+
+        .rdrMonthName {
+          text-align: center;
+          @include font-size($font-size-16);
+          font-family: $font-avenir;
+          color: $black;
+          padding: 0.3em;
+
+          @include media-size(desktop) {
+            padding: 0.833em;
+          }
+        }
+      }
+    }
+
+    .rdrCalendarWrapper {
+      @include font-size($font-size-16);
+      font-family: $font-avenir;
+    }
+
+    .rdrDefinedRangesWrapper,
+    .rdrDateDisplayWrapper,
+    .rdrMonthAndYearPickers {
+      display: none;
+    }
+
+    .rdrDayToday .rdrDayNumber span:after {
+      background: $brown700;
+      border-radius: 50%;
+    }
+
+    .rdrDayDisabled {
+      background-color: transparent;
+      cursor: not-allowed;
+    }
+
+    .btn-close-calendar {
+      position: absolute;
+      right: 5px;
+      top: 5px;
+      border: 0px;
+      background-color: transparent;
+      @include transition(all);
+
+      &:hover {
+        transform: scale(1.05)
+      }
+
+      i {
+        @include font-size($font-size-21);
+        color: $black;
+      }
+    }
+
+    .footer-text {
+      text-align: left;
+      @include font-size($font-size-11);
+      color: $gray500;
+      font-style: italic;
+      margin-bottom: 5px;
+
+      @include media-size(desktop) {
+        @include font-size($font-size-12);
+      }
+    }
+
+    .btn-reset-calendar {
+      min-width: 0px;
+      position: absolute;
+      right: -15px;
+      bottom: 10px;
+      padding: 5px 10px;
+      @include font-size($font-size-11);
+
+      @include media-size(desktop) {
+        right: 20px;
+        bottom: 20px;
+      }
+    }
+
+    .header-text {
+      text-align: left;
+      @include font-size($font-size-14);
+      font-family: $font-avenir;
+      text-transform: uppercase;
+      max-width: 130px;
+      margin-top: 10px;
+    }
+  }
+
+  .open+.booking-bar {
+
+    .icon-calendar,
+    .check-in-out {
+      pointer-events: none;
+    }
+
+    .check-in,
+    .check-out {
+      pointer-events: none;
+
+      &.active {
+        position: relative;
+
+        &::before {
+          content: '';
+          position: absolute;
+          border: 1px solid $brown700;
+          border-radius: 6px;
+          width: calc(100% - 5px);
+          height: calc(100% + 5px);
+          top: -5px;
+          left: -5px;
+        }
+      }
+    }
+  }
+
+  .calendar {
+    position: relative;
+    padding-bottom: 100px;
+
+    .rdrDateRangePickerWrapper {
+      height: calc(100vh - 310px);
+      max-height: 560px;
+      overflow-y: auto;
+    }
+
+    .footerCalendar {
+      position: absolute;
+      bottom: 0px;
+      left: -10px;
+      width: 100%;
+      border-top: 1px solid $gray200;
+      background-color: $white;
+    }
+
+    .booking-bar.room-guess {
+      margin-top: 10px;
+    }
+  }
+
+  .room-guess {
+    width: 220px;
+    display: flex;
+    justify-content: space-between;
+  }
+}

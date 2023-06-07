@@ -1,0 +1,368 @@
+.reserveATable {
+
+  form {
+    @media(max-width:768px) {
+      text-align: center;
+    }
+  }
+
+  position: relative;
+  margin: -50px auto 0px auto;
+  padding: 10px 0px 15px 15px;
+  box-shadow: 0px 3px 18px 3px rgba(119, 92, 61, 0.17);
+  border-radius: 8px;
+  width: 90%;
+  max-width: 900px;
+  background: $white;
+  z-index: 1;
+
+  @media(max-width:767px) {
+    margin-top: -150px;
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+
+  .formWrap {
+    width: calc(100% - 170px);
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: center;
+    display: flex;
+    text-align: left;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      width: calc(100%);
+      align-items: self-start;
+    }
+
+    >div {
+      display: block;
+      width: 100%;
+      position: relative;
+
+      @media (min-width: 768px) and (max-width: 900px) {
+        width: 110px;
+      }
+
+      @media (min-width: 901px) {
+        width: 150px;
+      }
+
+      &:after {
+        content: '';
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        width: 1px;
+        height: 70%;
+        background-color: $gray300;
+
+        @media (max-width: 767px) {
+          top: 100%;
+          right: 0px;
+          left: 0px;
+          width: 95%;
+          height: 1px;
+        }
+      }
+
+      &.time::after {
+        background-color: transparent;
+
+        @media (max-width: 767px) {
+          background-color: $gray300;
+        }
+      }
+
+      .dropdown-menu {
+        border-radius: 0px;
+        width: 100%;
+        max-width: 280px;
+        padding: 0px;
+        max-height: 300px;
+        overflow-y: auto;
+
+        @include font-size($font-size-14);
+
+        li a {
+          &:hover {
+            text-decoration: none;
+          }
+        }
+      }
+
+      label {
+        width: 100%;
+        text-transform: uppercase;
+        @include font-size($font-size-11);
+        font-family: $font-avenir;
+        color: $gray500;
+      }
+
+      .btn {
+        @include font-size($font-size-14);
+        font-family: $font-avenir;
+        text-transform: none;
+        text-align: left;
+        border: none !important;
+        padding: 0px;
+        margin-top: -10px;
+        width: 90%;
+        position: relative;
+
+        &:after {
+          position: absolute;
+          right: 30px;
+          top: 5px;
+          pointer-events: none;
+
+          @media(max-width:767px) {
+            right: 0px;
+          }
+        }
+      }
+    }
+
+    .restaurants {
+      width: calc(100%);
+
+      @media (min-width: 768px) and (max-width: 900px) {
+        width: calc(100% - 325px);
+      }
+
+      @media (min-width: 901px) {
+        width: calc(100% - 450px);
+      }
+
+
+      .btn:after {
+        @include media-size(tablet) {
+          right: 10px;
+        }
+
+        @include media-size(desktop) {
+          right: 0px;
+        }
+      }
+    }
+  }
+
+  .btnReserve {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    height: 100%;
+    width: 166px;
+    border-radius: 0px 8px 8px 0px;
+
+    @media(max-width:767px) {
+      position: relative;
+      border-radius: 0px;
+      margin: 20px auto 10px auto;
+    }
+
+    &.disable {
+      pointer-events: none;
+    }
+  }
+
+  .react-datepicker-wrapper {
+    input {
+      @include font-size($font-size-14);
+      font-family: $font-avenir;
+      border: none !important;
+      padding: 0px;
+      cursor: pointer;
+      position: relative;
+      width: 100%;
+
+      &:focus,
+      &:focus-visible {
+        outline: 0;
+      }
+    }
+  }
+
+  .date {
+    position: relative;
+
+    &:before {
+      content: "\F229";
+      font-family: "bootstrap-icons";
+      top: 18px;
+      right: 25px;
+      position: absolute;
+      z-index: 11;
+      transform: scale(0.6);
+      pointer-events: none;
+
+      @media (max-width: 768px) {
+        right: 30px;
+      }
+    }
+
+  }
+}
+
+@media (min-width: 768px) and (max-width: 900px) {
+  .reserveATable {
+    .date:before {
+      display: none;
+    }
+
+    .dropdown-toggle:not(.selectRestaurant) {
+
+      &::before,
+      &::after {
+        display: none;
+      }
+    }
+  }
+}
+
+#reserveTableModal,
+#reserveTableUpdateModal {
+  .react-datepicker-popper {
+    z-index: 1;
+  }
+
+  .input-group {
+    .input-group-text {
+      width: 88px;
+      border: 1px solid #bca68d;
+      background-color: transparent;
+      color: $gray500;
+      border-radius: 0px;
+    }
+  }
+
+  .input-reserve,
+  .react-datepicker-wrapper {
+    width: calc(100% - 88px);
+    border-radius: 0px;
+    background-color: transparent !important;
+    border-color: #bca68d;
+    text-transform: initial;
+    text-align: left;
+
+    &:after {
+      position: absolute;
+      right: 12px;
+      top: 12px;
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0)
+    }
+
+  }
+
+  .react-datepicker__input-container {
+    width: 100%;
+    position: relative;
+    @include font-size($font-size-14);
+
+    &:after {
+      position: absolute;
+      right: 12px;
+      top: 12px;
+      display: inline-block;
+      margin-left: 0.255em;
+      vertical-align: 0.255em;
+      content: "";
+      border-top: 0.3em solid;
+      border-right: 0.3em solid transparent;
+      border-bottom: 0;
+      border-left: 0.3em solid transparent;
+    }
+
+    input {
+      width: 100%;
+      border-radius: 0px;
+      background-color: transparent !important;
+      border: 1px solid #bca68d;
+      padding: 4px 10px !important;
+
+      &:focus {
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0);
+        outline: 0 !important;
+      }
+    }
+  }
+}
+
+.react-datepicker__day--selected {
+  background-color: $brown700 !important;
+  font-family: $font-avenir;
+}
+
+.profile_reservation {
+  border: 1px solid $gray200;
+  margin-bottom: 20px;
+
+  .header {
+    @include font-size($font-size-12);
+    text-transform: uppercase;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 10px;
+    border-bottom: 1px solid $gray200;
+
+    .col:not(:first-child) {
+      text-align: left;
+
+      @include media-size(big-mobile) {
+        text-align: right;
+      }
+    }
+  }
+
+  .detail {
+    padding: 10px;
+    position: relative;
+
+    .name {
+      font-family: $font-avenir;
+    }
+
+    .col {
+      max-width: 180px;
+    }
+  }
+
+  .ctas-profile {
+    margin-top: 10px;
+    border-top: 1px dashed $gray200;
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+
+    .link {
+      margin-left: 20px;
+      border: 0px;
+      background-color: transparent;
+      text-transform: uppercase;
+      color: var(--secondary-color);
+      font-family: $font-avenir;
+      @include font-size($font-size-12);
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+
+.fullView .yourInfo .form-control[disabled] {
+  background-color: #e9ecef !important;
+  border-color: #ced4da !important;
+  color: #8b8b8b;
+  cursor: not-allowed;
+}
+
+.accountTemp {
+  text-align: center;
+  margin-top: 30px;
+  @include font-size($font-size-12);
+  color: $gray500;
+}

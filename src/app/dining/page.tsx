@@ -1,10 +1,9 @@
-
 import Image from 'next/image'
 
-export default function Home() {
+export default function Dining() {
   return (
     <main>
-      Home page
+      Dining page
     </main>
   )
 }

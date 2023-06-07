@@ -1,0 +1,353 @@
+// ******************************************
+// Theme
+// ******************************************
+// Light mode
+$theme-map-light: ($--txt-color: $black,
+  $--bg-color: $white,
+);
+
+//Green theme
+$theme-map-green: ($--primary-color: $brown700,
+  $--secondary-color: $green600,
+  $--secondary-color-hover: #008475,
+);
+
+// Default: light mode && Green theme
+:root {
+  @include spread-map($theme-map-light);
+  @include spread-map($theme-map-green);
+}
+
+
+// toggle button mode
+.mode {
+  position: relative;
+  transform: scale(0.8);
+  margin-right: 5px;
+
+  .checkbox-label {
+    background-color: #1a0d01;
+    width: 50px;
+    height: 26px;
+    border-radius: 50px;
+    position: relative;
+    padding: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    pointer-events: none;
+
+    .ball {
+      background-color: #fff;
+      width: 22px;
+      height: 22px;
+      position: absolute;
+      left: 2px;
+      top: 2px;
+      border-radius: 50%;
+      transition: transform 0.2s linear;
+    }
+  }
+
+  .checkboxMode {
+    opacity: 0;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+
+    &:checked+.checkbox-label .ball {
+      transform: translateX(24px);
+    }
+  }
+
+  .bi-moon-fill {
+    @include font-size($font-size-14)
+  }
+
+  .bi-moon-fill,
+  .bi-sun-fill {
+    color: #f1c40f;
+  }
+}
+
+.mode.true {
+  display: none;
+
+}
+
+.sub-header .mode {
+  &.false {
+    display: none;
+  }
+
+  &.true {
+    display: block;
+    position: absolute;
+    width: 100px;
+    top: 30px;
+    left: 10px;
+    overflow: hidden;
+
+    :checked+.checkbox-label {
+      background-color: #51361d;
+    }
+  }
+}
+
+
+.dark {
+  background-color: #2d1a07;
+  color: $gray300;
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: var(--bg-color);
+  }
+
+  footer {
+    background-color: #0f0802;
+  }
+
+  .reserveATable {
+    background-color: #170e06;
+
+    .formWrap>div:after {
+      background-color: $gray500;
+    }
+
+    .formWrap>div.time::after {
+      background-color: transparent;
+    }
+
+    label,
+    .dropdown-toggle {
+      color: var(--bg-color) !important;
+    }
+
+    input {
+      background-color: transparent;
+      color: var(--bg-color) !important;
+    }
+  }
+
+  .sub-header {
+    background-color: $black;
+
+    @include media-size(big-mobile) {
+      background-color: #2d1a07;
+    }
+  }
+
+  .navbar {
+    background-color: $brown700 !important;
+    color: $white;
+
+    a,
+    .nav-link {
+      color: $white !important;
+
+      &:after {
+        background-color: #fff !important;
+      }
+
+      &:hover,
+      &.active,
+      &:active {
+        color: $white !important;
+      }
+    }
+  }
+
+  .promotion .item {
+    border-color: transparent;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+
+  .listCards .ctas a:not(.btn) {
+    color: $white;
+  }
+
+  .btn-secondary,
+  a.btn-secondary {
+    background-color: transparent !important;
+
+    &:hover {
+      background-color: var(--secondary-color) !important;
+    }
+  }
+
+  .banner .headline-box {
+    h1.marketing-title:after {
+      background-color: $gray300 !important;
+    }
+
+    .content-wrap {
+      background-color: rgba(6, 3, 1, .9);
+    }
+
+    .headerContent {
+      color: $gray300 !important;
+    }
+  }
+
+  .page-title,
+  .info-box li {
+    color: $gray300 !important;
+  }
+
+  h2:after,
+  .h2:after {
+    background-color: $gray300 !important;
+  }
+
+  .testimonial-wrap {
+    background-color: rgb(66 56 45 / 70%);
+
+    .wynnLogo {
+      filter: invert(55%);
+    }
+  }
+
+  .accordion-item {
+    background-color: transparent;
+    border-bottom-color: #474747;
+  }
+
+  .accordion-button::after {
+    filter: invert(75%);
+
+  }
+
+  .accordion .question,
+  .accordion p {
+    color: $gray300 !important;
+  }
+
+  .recommendation {
+    background-color: rgba(30, 16, 3, .5);
+  }
+
+  #profileModal .W550 {
+    background-color: rgba(0, 0, 0, 0) !important;
+
+    @include media-size(big-mobile) {
+      background-color: rgba(0, 0, 0, 0.4) !important;
+    }
+
+    .info {
+      background-color: $black;
+    }
+
+    .data_info,
+    .ctas-profile,
+    .header {
+      border-color: $gray700;
+    }
+
+    .profile_reservation {
+      border-color: transparent;
+      background-color: #2d1a07;
+    }
+
+    .header {
+      background-color: $black;
+    }
+
+
+  }
+
+  .fullView {
+
+    .modal-dialog {
+      background-color: #2d1a07;
+
+      .logo img {
+        background-color: #FFF;
+        padding: 20px 20px 20px 20px;
+      }
+
+      .input-group-text,
+      .form-control,
+      .dropdown-toggle,
+      input,
+      .accountTemp,
+      .note,
+      h3 {
+        color: $gray300 !important;
+      }
+
+      .list p {
+        color: $gray300;
+      }
+
+      .list h3 {
+        color: $gray400 !important;
+      }
+
+      h3 {
+        border-bottom-color: $gray400;
+      }
+    }
+
+    .form-control[disabled] {
+      color: $gray400 !important;
+    }
+  }
+
+
+
+  .modal-content {
+
+    .w550,
+    .w350 {
+      background-color: rgba(0, 0, 0, 0.4) !important;
+      padding: 20px 20px 50px 20px;
+    }
+
+  }
+
+  .btn-close {
+    background-color: rgba(250, 250, 250, 1);
+    border-radius: 50%;
+    padding: 5px;
+  }
+
+  .landingPage {
+    h3 {
+      color: $gray400;
+
+      &.bg {
+        background-color: transparent;
+      }
+    }
+
+    .about {
+      background-color: rgba(0, 0, 0, 0.4) !important;
+
+    }
+
+    .developerTeam {
+      span {
+        background-color: #008475;
+      }
+    }
+
+    .developer {
+
+      .info .title,
+      a,
+      li a,
+      li {
+        color: $gray300 !important;
+      }
+
+      .info .name {
+        color: $gray400;
+      }
+    }
+  }
+}
