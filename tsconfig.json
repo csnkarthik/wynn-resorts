@@ -18,11 +18,9 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "rootDir": "src",
+    // "rootDir": "src",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/app/*"],
     },
     "plugins": [
       {

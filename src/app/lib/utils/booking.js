@@ -1,5 +1,4 @@
 import { addDays, format, differenceInDays } from 'date-fns'
-import { _$, $all } from "../../lib/utils/index";
 
 export const urlWLV = 'https://reservations.wynnlasvegas.com/ibe/index.aspx?hotelID=13763&langID=1&currID=0'
 
@@ -34,8 +33,6 @@ export const validateBookingDate = (endDate, startDate, setDiffInDays, setRange,
     hideOnClickOutside(e.target, refOne, setOpen);
   }, true)
 }
-
-
 
 
 // Open the Calendar

@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from 'react'
 import { DateRangePicker } from 'react-date-range'
 import format from 'date-fns/format'
 import { addDays } from 'date-fns'
-import { _$ } from "../../lib/utils/index";
-import { disableStatusBooking, validateBookingDate, handleSelect, handleOpenCalendar, handleReset, urlWLV } from "../../lib/utils/booking"
+import { _$ } from "@/lib/utils/index";
+import { disableStatusBooking, validateBookingDate, handleSelect, handleOpenCalendar, handleReset, urlWLV } from "@/lib/utils/booking"
 
 
 const BookingBarMobile = () => {
@@ -109,7 +109,7 @@ const BookingBarMobile = () => {
         <div className="container">
           <div className="row booking-wrap">
             <div className="col logo">
-              <Link aria-label="Wynn Las Vegas Private Access" href="/diningPage"> <Image src="/images/logo.gif" width="130" height="70" alt="Wynn Las Vegas" /></Link>
+              <Link aria-label="Wynn Las Vegas Private Access" href="/"> <Image src="/images/logo.gif" width="130" height="70" alt="Wynn Las Vegas" /></Link>
             </div>
             <div className="col">
               <form className="booking-room">
