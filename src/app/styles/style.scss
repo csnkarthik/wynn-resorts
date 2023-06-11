@@ -1,4 +1,5 @@
 // STYLE IMPORTS
+
 @import './fonts';
 @import './variables';
 @import './mixins';
@@ -16,4 +17,6 @@
 @import './modal';
 @import './landingpage';
 @import './booking-bar';
+@import './slick';
+@import '~slick-carousel/slick/slick', '~slick-carousel/slick/slick-theme';
 @import './theme';

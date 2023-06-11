@@ -49,10 +49,15 @@
         z-index: 299;
         left: 0;
         padding-left: 15px;
+        display: block;
+
         // box-shadow: 0px 3px 18px 3px rgba(119, 92, 61, 0.17);
+        @include media-size(desktop) {
+            display: none;
+        }
     }
 
-    @include media-size(big-mobile) {
+    @include media-size(desktop) {
         height: auto;
     }
 
@@ -64,7 +69,7 @@
         display: block;
         z-index: 300;
 
-        @include media-size(big-mobile) {
+        @include media-size(desktop) {
             display: none;
         }
 
@@ -148,7 +153,7 @@
         }
 
 
-        @include media-size(big-mobile) {
+        @include media-size(desktop) {
             height: auto;
             opacity: 1;
             display: flex !important;
@@ -178,7 +183,7 @@
             text-transform: uppercase;
             margin-top: 10px;
 
-            @include media-size(big-mobile) {
+            @include media-size(desktop) {
                 margin-top: 0px;
             }
 
@@ -211,7 +216,7 @@
                     @include transition(all);
                     max-width: 110px;
 
-                    @include media-size(big-mobile) {
+                    @include media-size(desktop) {
                         width: 0px;
                     }
                 }
@@ -228,7 +233,7 @@
                         right: auto;
                         width: calc(100%);
 
-                        @include media-size(big-mobile) {
+                        @include media-size(desktop) {
                             left: 20px;
                             width: calc(100% - 40px);
                         }
@@ -254,7 +259,7 @@
 nav-item.hidden-d {
     display: block;
 
-    @include media-size(big-mobile) {
+    @include media-size(desktop) {
         display: none;
     }
 }
@@ -314,4 +319,16 @@ nav-item.hidden-d {
     @include media-size(big-mobile) {
         display: none;
     }
+}
+
+.nav-item {
+    display: none;
+
+    @include media-size(desktop) {
+        display: block;
+    }
+}
+
+.show .nav-item {
+    display: block;
 }

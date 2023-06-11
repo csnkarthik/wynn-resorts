@@ -1,5 +1,7 @@
 
-import ModalGallery from "./_ModalGallery";
+"use client"
+
+import ModalGallery from "./GalleryModal";
 
 const Modal = ({ photos }: any) => {
   return (

@@ -4,15 +4,17 @@ import SubHeader from './SubHeader'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import { isTablet, sticky, _$, isMobile, handleSticky, isViewDesktop } from '../../lib/utils/index'
+import { _$, isMobile, isViewDesktop } from '@/lib/utils/index'
 import BookingBar from '../booking/BookingBar'
 import BookingBarMobile from '../booking/BookingBarMobile'
+import { usePathname } from 'next/navigation'
 
 const Header = () => {
   let homeClass: any = "nav-link";
+  const pathName = usePathname();
+
   const [viewCalendarDesktop, setViewCalendarDesktop] = useState(true)
   const [viewCalendarMobile, setViewCalendarMobile] = useState(false)
-
 
   useEffect(() => {
     let isDesktop = isViewDesktop();
@@ -31,9 +33,9 @@ const Header = () => {
     return !isMenuOpen && _$('.navbar').classList.toggle("menu-open-m");
   }
 
-  const menuClick = () => {
-    isMobile() && _$('.navbar-toggler').click();
-  }
+  // const menuClick = () => {
+  //   isMobile() && _$('.navbar-toggler').click();
+  // }
 
 
   return (
@@ -43,7 +45,7 @@ const Header = () => {
         {viewCalendarDesktop && <BookingBar />}
         <nav className="navbar navbar-expand-sm navbar-light mainNav">
           <div className="container">
-            {viewCalendarMobile && <div className="logo logo-m">
+            {<div className="logo logo-m">
               <Link aria-label="Wynn Las Vegas Private Access" href="/">
                 <Image src="/images/logo.gif" width="130" height="70" alt="Wynn Las Vegas" />
               </Link>
@@ -60,28 +62,28 @@ const Header = () => {
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav">
                 <li className="nav-item home">
-                  <Link className={homeClass} href="/" onClick={menuClick} >ROOMS & SUITES</Link>
+                  <Link className={homeClass} href="/" >ROOMS & SUITES</Link>
                 </li>
                 <li className="nav-item">
-                  <Link className={homeClass} href="#" onClick={menuClick}>WYNN REWARDS</Link>
+                  <Link className={homeClass} href="#">WYNN REWARDS</Link>
                 </li>
                 <li className="nav-item">
-                  <Link className={homeClass} href="#" onClick={menuClick}>OFFERS</Link>
+                  <Link className={homeClass} href="#" >OFFERS</Link>
                 </li>
                 <li className="nav-item">
-                  <Link className={homeClass} href="/dining" onClick={menuClick}>DINING</Link>
+                  <Link className={pathName == "/dining" ? "nav-link active" : "nav-link"} href="/dining/">DINING</Link>
                 </li>
                 <li className="nav-item">
-                  <Link className={homeClass} href="#" onClick={menuClick}>CASINO</Link>
+                  <Link className={homeClass} href="#">CASINO</Link>
                 </li>
                 <li className="nav-item">
-                  <Link className={homeClass} href="#" onClick={menuClick}>EXPERIENCES</Link>
+                  <Link className={homeClass} href="#" >EXPERIENCES</Link>
                 </li>
                 <li className="nav-item">
-                  <Link className={homeClass} href="#" onClick={menuClick}>ENTERTAINMENT</Link>
+                  <Link className={homeClass} href="#" >ENTERTAINMENT</Link>
                 </li>
                 <li className="nav-item">
-                  <Link className={homeClass} href="#" onClick={menuClick}>SHOPS</Link>
+                  <Link className={homeClass} href="#">SHOPS</Link>
                 </li>
               </ul>
             </div>

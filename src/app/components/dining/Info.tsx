@@ -1,3 +1,5 @@
+"use client"
+
 import RichText from "../RichText"
 
 const Info = ({ infoDining }: any) => {

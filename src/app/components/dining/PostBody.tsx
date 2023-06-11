@@ -1,11 +1,13 @@
+"use client"
+
 import RichText from '../RichText'
-import Gallery from './_Gallery';
-import Info from './_Info';
-import TwoCols from './_2cols';
-import Testimonial from './_testimonial';
-import FAQs from './_FAQs';
-import Recommendation from './_Recommendation';
-import Modal from './_modal';
+import Gallery from './Gallery';
+import Info from './Info';
+import TwoCols from './TwoCols';
+import Testimonial from './Testimonial';
+import FAQs from './FAQs';
+import Recommendation from './Recommendation';
+import Modal from './Modal';
 
 const PostBody = ({ restaurant, handleMenuClick }: any) => {
   const { content, gallery, specialMeal, testimonial, faqList, recommendationRestaurants } = restaurant?.fields;

@@ -1,8 +1,10 @@
+"use client"
+
 import Image from "next/image"
 import Slider from 'react-slick'
 import Link from "next/link";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
 import { _$, $all } from "@/lib/utils";
 import { useState } from "react";
 
@@ -30,7 +32,7 @@ export const RecommendedItems = ({ pic, i }: any) => {
 //Render Caption of Item of Carousel
 export const Content = ({ title, description, slug, externalLink, i, idMenu, handleMenuClick }: any) => {
 
-  const url: any = externalLink ? externalLink : '/diningPage/' + slug;
+  const url: any = externalLink ? externalLink : '/dining/' + slug;
   return (
     <div className="restaurant d-none" data-id={i}>
       <div className="text">

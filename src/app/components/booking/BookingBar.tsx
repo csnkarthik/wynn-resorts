@@ -44,7 +44,7 @@ const BookingBar = () => {
 
   }, [range, open, guess, room, elCheckIn, elCheckOut, elGuessMinus, elRoomMinus, elGuessPlus, elRoomPlus, elBtnReset])
   return (
-    <div className="calendarWrap">
+    <div className="calendarWrap desktop">
       {open &&
         <div className="date-picker open">
           <div ref={refOne} className="container ">

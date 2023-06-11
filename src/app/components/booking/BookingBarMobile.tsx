@@ -44,7 +44,7 @@ const BookingBarMobile = () => {
 
 
   return (
-    <div className="calendarWrap">
+    <div className="calendarWrap mobile">
       {open &&
         <div className="date-picker open">
           <div ref={refOne} className="container">

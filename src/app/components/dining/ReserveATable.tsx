@@ -41,7 +41,7 @@ const ReserveATable = ({ diningDetail }: any) => {
     setReserveInfo(newData);
     (restaurant === "Select A Restaurant") && _$('.invalid-feedback.restaurant').classList.add('d-block');
     handleSticky();
-    console.log('Reserve table Info:', newData)
+    console.log('Reserve table info', newData)
   };
   return (
     <>
