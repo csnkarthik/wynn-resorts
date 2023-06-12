@@ -1,7 +1,6 @@
 'use client'
 
 import { client } from '@/lib/contentful/client'
-import { handleSticky } from '@/lib/utils'
 import PostBody from '@/components/dining/PostBody'
 import PostHeader from '@/components/dining/PostHeader'
 import Menu from '@/components/dining/Menu'
@@ -11,14 +10,9 @@ export const dynamicParams = true
 const DiningDetail = async ({ params }: { params: { slug: string } }) => {
   const restaurant = await getRestaurant(params)
 
-  const handleMenuClick = (e: any) => {
-    e.preventDefault()
-    handleSticky();
-  }
-
   return (
     <main>
-      <PostHeader restaurant={restaurant} handleMenuClick={handleMenuClick} />
+      <PostHeader restaurant={restaurant} />
       <PostBody restaurant={restaurant} />
       <Menu />
     </main>

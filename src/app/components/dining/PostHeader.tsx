@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { _$, handleSticky, $id } from '@/lib/utils';
 import { format } from 'date-fns'
 
-const PostHeader = ({ restaurant, handleMenuClick }: any) => {
+const PostHeader = ({ restaurant }: any) => {
   const { name, desktopBanner, mobileBanner, subTitle, shortDescription, menu } = restaurant?.fields
 
   const handleReserve = (e: any) => {
@@ -15,8 +15,8 @@ const PostHeader = ({ restaurant, handleMenuClick }: any) => {
       people: "2 Guests",
       time: "5:00 PM"
     }
-    handleSticky()
-    console.log('Reserve table info', reserveInfo)
+    // handleSticky()
+    alert(`Reserve table info "\n" Restaurant:${reserveInfo.restaurant}"\n" People:${reserveInfo.people}"\n" Date:${reserveInfo.startDate}"\n" Time:${reserveInfo.time}`)
   };
 
   return (

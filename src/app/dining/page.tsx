@@ -1,13 +1,13 @@
 'use client'
 
-import { handleSticky, $all, _$ } from '@/lib/utils';
+import { $all, _$ } from '@/lib/utils';
 import DiningBanner from '@/components/dining/DiningBanner';
 import Promotion from '@/components/dining/Promotion';
 import PostCard from '@/components/dining/PostCard';
 import Menu from '@/components/dining/Menu';
 import { getRestaurants, getInfoDiningPage, getRestaurantsCategories } from '../api/data'
 
-const Dining = async () => {
+const Home = async () => {
 
   //Get Data from API
   const infoDiningPageData: any = getInfoDiningPage();
@@ -18,7 +18,6 @@ const Dining = async () => {
   const handleMenuClick = (e: any) => {
     e.preventDefault()
     e.stopPropagation();
-    handleSticky();
   }
 
   const handleFilter = ((target: any, cat: string) => {
@@ -62,4 +61,4 @@ const Dining = async () => {
   )
 }
 
-export default Dining
+export default Home

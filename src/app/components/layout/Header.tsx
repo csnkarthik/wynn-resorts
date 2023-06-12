@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 import { _$, isMobile, isViewDesktop } from '@/lib/utils/index'
 import BookingBar from '../booking/BookingBar'
 import BookingBarMobile from '../booking/BookingBarMobile'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 const Header = () => {
   let homeClass: any = "nav-link";
@@ -25,7 +25,7 @@ const Header = () => {
       setViewCalendarMobile(true)
       setViewCalendarDesktop(false)
     }
-  }, [viewCalendarDesktop, viewCalendarMobile])
+  }, [viewCalendarDesktop, viewCalendarMobile, pathName])
 
 
   const hampugerMenuClick = () => {
@@ -37,6 +37,7 @@ const Header = () => {
   //   isMobile() && _$('.navbar-toggler').click();
   // }
 
+  const router = useRouter()
 
   return (
     <>
@@ -62,28 +63,28 @@ const Header = () => {
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav">
                 <li className="nav-item home">
-                  <Link className={homeClass} href="/" >ROOMS & SUITES</Link>
+                  <Link className={homeClass} href="/" prefetch={false} >ROOMS & SUITES</Link>
                 </li>
                 <li className="nav-item">
-                  <Link className={homeClass} href="#">WYNN REWARDS</Link>
+                  <Link className={homeClass} href="/" prefetch={false} >WYNN REWARDS</Link>
                 </li>
                 <li className="nav-item">
-                  <Link className={homeClass} href="#" >OFFERS</Link>
+                  <Link className={homeClass} href="/" prefetch={false}>OFFERS</Link>
                 </li>
                 <li className="nav-item">
-                  <Link className={pathName == "/dining" ? "nav-link active" : "nav-link"} href="/dining/">DINING</Link>
+                  <a className={pathName == "/dining" ? "nav-link active" : "nav-link"} href="/dining/">DINING</a>
                 </li>
                 <li className="nav-item">
-                  <Link className={homeClass} href="#">CASINO</Link>
+                  <Link className={homeClass} href="/" prefetch={false}>CASINO</Link>
                 </li>
                 <li className="nav-item">
-                  <Link className={homeClass} href="#" >EXPERIENCES</Link>
+                  <Link className={homeClass} href="/" prefetch={false} >EXPERIENCES</Link>
                 </li>
                 <li className="nav-item">
-                  <Link className={homeClass} href="#" >ENTERTAINMENT</Link>
+                  <Link className={homeClass} href="/" prefetch={false} >ENTERTAINMENT</Link>
                 </li>
                 <li className="nav-item">
-                  <Link className={homeClass} href="#">SHOPS</Link>
+                  <Link className={homeClass} href="/" prefetch={false} >SHOPS</Link>
                 </li>
               </ul>
             </div>

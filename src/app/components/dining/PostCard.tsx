@@ -26,7 +26,7 @@ const PostCard = ({ restaurant, handleMenuClick }: any) => {
       </div>
       <div className="ctas">
         {menu && <div><Link href={`#`} aria-label="View Menu" id-menu={menu.sys.id} data-bs-toggle="modal" data-bs-target=".menuModal" onClick={handleMenuClick}>View Menu</Link></div>}
-        <div><Link href={`/dining/${slug}/`} aria-label="View Detail" className='btn btn-secondary'>View Detail</Link></div>
+        <div><a href={`/dining/${slug}/`} aria-label="View Detail" className='btn btn-secondary'>View Detail</a></div>
       </div>
     </div>
   )

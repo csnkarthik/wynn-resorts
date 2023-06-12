@@ -8,6 +8,7 @@
 
   &.desktop {
     display: none;
+    z-index: 1;
 
     @include media-size(desktop) {
       display: block;

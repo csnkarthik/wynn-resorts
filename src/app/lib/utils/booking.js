@@ -12,7 +12,7 @@ export const disableStatusBooking = (guess, room, elGuessMinus, elRoomMinus, elG
 
 export const validateBookingDate = (endDate, startDate, setDiffInDays, setRange, selectedDate, elBtnReset, setOpen, refOne, open) => {
   if (open) {
-    document.body.style.overflowY = "hidden"
+    // document.body.style.overflowY = "hidden"
     const diff = differenceInDays(endDate, startDate);
     setDiffInDays(diff)
     if (startDate == endDate) {
@@ -25,7 +25,7 @@ export const validateBookingDate = (endDate, startDate, setDiffInDays, setRange,
       elBtnReset?.add('disabled')
     }
   } else {
-    document.body.style.overflowY = "auto"
+    // document.body.style.overflowY = "auto"
   }
 
   open && document.addEventListener("keydown", (e) => hideOnEscape(e.target, setOpen), true)

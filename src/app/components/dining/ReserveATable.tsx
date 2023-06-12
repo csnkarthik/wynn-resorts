@@ -4,7 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
 import Link from "next/link";
 import { format } from "date-fns"
-import { $all, handleSticky, _$, partySize, timeList } from "@/lib/utils";
+import { $all, _$, partySize, timeList } from "@/lib/utils";
 
 const ReserveATable = ({ diningDetail }: any) => {
   // Data
@@ -40,8 +40,7 @@ const ReserveATable = ({ diningDetail }: any) => {
     }
     setReserveInfo(newData);
     (restaurant === "Select A Restaurant") && _$('.invalid-feedback.restaurant').classList.add('d-block');
-    handleSticky();
-    console.log('Reserve table info', newData)
+    console.log(`Reserve table info`, newData)
   };
   return (
     <>
