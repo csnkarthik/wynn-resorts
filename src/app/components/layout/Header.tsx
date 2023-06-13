@@ -33,10 +33,6 @@ const Header = () => {
     return !isMenuOpen && _$('.navbar').classList.toggle("menu-open-m");
   }
 
-  // const menuClick = () => {
-  //   isMobile() && _$('.navbar-toggler').click();
-  // }
-
   const router = useRouter()
 
   return (

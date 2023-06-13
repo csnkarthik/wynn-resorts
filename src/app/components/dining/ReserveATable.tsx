@@ -23,10 +23,13 @@ const ReserveATable = ({ diningDetail }: any) => {
     time: "05:30 PM"
   })
 
-
+  console.log(restaurant)
   const handleChange = (e: any) => {
+    e.preventDefault();
+    e.stopPropagation()
     _$('.invalid-feedback.restaurant').classList.add('d-none');
     setRestaurant(e.target.text)
+    return false;
   }
 
   const handleReserve = (e: any) => {
@@ -42,6 +45,8 @@ const ReserveATable = ({ diningDetail }: any) => {
     (restaurant === "Select A Restaurant") && _$('.invalid-feedback.restaurant').classList.add('d-block');
     console.log(`Reserve table info`, newData)
   };
+
+
   return (
     <>
       <div>
@@ -60,7 +65,9 @@ const ReserveATable = ({ diningDetail }: any) => {
               <label>Party Size</label>
               <button type="button" className="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">{size}</button>
               <ul className="dropdown-menu">
-                {partySize?.map((size: any, i: number) => <li key={i}><Link className="dropdown-item" href="/dining" onClick={(e: any) => setSize(e.target.text)}>{size}</Link></li>)}
+                {partySize?.map((size: any, i: number) => <li key={i}><a className="dropdown-item" href="/dining" onClick={(e: any) => {
+                  e.preventDefault(); setSize(e.target.text); return false
+                }}>{size}</a></li>)}
               </ul>
               <input className="data" name="size1" type="hidden" defaultValue={size} />
             </div>
@@ -73,7 +80,7 @@ const ReserveATable = ({ diningDetail }: any) => {
               <label>Time</label>
               <button type="button" className="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">{time}</button>
               <ul className="dropdown-menu">
-                {timeList?.map((time: any, i: number) => <li key={i}><Link className="dropdown-item" href="/dining" onClick={(e: any) => setTime(e.target.text)}>{time}</Link></li>)}
+                {timeList?.map((time: any, i: number) => <li key={i}><a className="dropdown-item" href="/dining" onClick={(e: any) => { e.preventDefault(); setTime(e.target.text) }}>{time}</a></li>)}
               </ul>
               <input className="data" name="time" type="hidden" defaultValue={time} />
             </div>

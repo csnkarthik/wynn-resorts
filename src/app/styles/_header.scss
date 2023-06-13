@@ -195,6 +195,7 @@
                 padding-left: 0px;
                 padding-right: 0px;
                 @include font-size($font-size-14);
+                cursor: pointer;
 
                 @include media-size(big-mobile) {
                     padding-right: 1.15rem;
