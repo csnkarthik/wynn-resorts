@@ -23,7 +23,6 @@ const ReserveATable = ({ diningDetail }: any) => {
     time: "05:30 PM"
   })
 
-  console.log(restaurant)
   const handleChange = (e: any) => {
     e.preventDefault();
     e.stopPropagation()

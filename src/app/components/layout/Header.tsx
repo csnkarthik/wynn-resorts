@@ -3,43 +3,25 @@ import React from 'react'
 import SubHeader from './SubHeader'
 import Link from 'next/link'
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
-import { _$, isMobile, isViewDesktop } from '@/lib/utils/index'
+import { _$ } from '@/lib/utils/index'
 import BookingBar from '../booking/BookingBar'
-import BookingBarMobile from '../booking/BookingBarMobile'
 import { usePathname, useRouter } from 'next/navigation'
 
 const Header = () => {
   let homeClass: any = "nav-link";
   const pathName = usePathname();
-
-  const [viewCalendarDesktop, setViewCalendarDesktop] = useState(true)
-  const [viewCalendarMobile, setViewCalendarMobile] = useState(false)
-
-  useEffect(() => {
-    let isDesktop = isViewDesktop();
-    if (isDesktop) {
-      setViewCalendarMobile(false);
-      setViewCalendarDesktop(true);
-    } else {
-      setViewCalendarMobile(true)
-      setViewCalendarDesktop(false)
-    }
-  }, [viewCalendarDesktop, viewCalendarMobile, pathName])
-
+  const router = useRouter()
 
   const hampugerMenuClick = () => {
     let isMenuOpen: any = _$('.navbar #navbarNav').classList.contains('show');
     return !isMenuOpen && _$('.navbar').classList.toggle("menu-open-m");
   }
 
-  const router = useRouter()
-
   return (
     <>
       <header id="myHeader">
         <SubHeader />
-        {viewCalendarDesktop && <BookingBar />}
+        <BookingBar />
         <nav className="navbar navbar-expand-sm navbar-light mainNav">
           <div className="container">
             {<div className="logo logo-m">
@@ -87,7 +69,6 @@ const Header = () => {
           </div>
         </nav>
       </header>
-      {viewCalendarMobile && <BookingBarMobile />}
     </>
   )
 }

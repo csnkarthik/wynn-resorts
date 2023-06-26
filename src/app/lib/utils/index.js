@@ -1,9 +1,5 @@
 import Image from "next/image"
-
-export function formatDate(dateString, options) {
-  const { format } = new Intl.DateTimeFormat('en-US', options)
-  return format(new Date(dateString))
-}
+import { format } from 'date-fns'
 
 export const $all = (selector) => typeof document !== 'undefined' && document.querySelectorAll(selector);
 export const $id = (selector) => typeof document !== 'undefined' && document.getElementById(selector);
@@ -18,6 +14,10 @@ export const sticky = (element, height, className) => window?.pageYOffset > heig
 export const handleSticky = () => {
   (isTablet() || isMobile()) && _$("#myHeader").classList.remove('sticky');
   isViewDesktop() && _$(".mainNav").classList.remove('sticky');
+}
+
+export function formatDate(dateString) {
+  return format(dateString, "MM/dd/yyyy");
 }
 
 export const partySize = ['1 Guest', '2 Guests', '3 Guests', '4 Guests', '5 Guests', '6 Guests']

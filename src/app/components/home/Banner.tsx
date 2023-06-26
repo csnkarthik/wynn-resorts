@@ -2,7 +2,6 @@
 
 import Image from 'next/image'
 import { _$ } from "@/lib/utils";
-import { bottom } from '@popperjs/core';
 
 const Banner = () => {
 
