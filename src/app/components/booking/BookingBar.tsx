@@ -19,9 +19,6 @@ const BookingBar = () => {
   const [open, setOpen] = useState(false);
   const refOne = useRef(null);
 
-  // const useMountEffect = (fun: any) => useEffect(fun, []);
-  // const executeScroll = () => refOne?.current?.scrollIntoView();
-  // useMountEffect(executeScroll);
   const [range, setRange] = useState([{
     startDate: new Date(),
     endDate: addDays(new Date(), 1),
@@ -38,6 +35,7 @@ const BookingBar = () => {
       key: 'selection',
     }])
 
+    // Check mobile or desktop
     isViewDesktop() ? setViewCalendarDesktop(true) : setViewCalendarDesktop(false);
     if (open) {
       document.body.style.overflowY = "hidden"
@@ -63,20 +61,30 @@ const BookingBar = () => {
 
     elCheckIn?.toggle('active');
     elCheckOut?.toggle('active');
-    isCurrMonth && preButton?.classList.add("disabled");
-    !isCurrMonth && preButton?.classList.remove("disabled");
-    !isCurrMonth && resetBtn?.classList.remove("disabled");
+
+    // Toggle disabled buttons
+    if (!isCurrMonth) {
+      preButton?.classList.add("disabled");
+    } else {
+      preButton?.classList.remove("disabled");
+      resetBtn?.classList.remove("disabled");
+    }
+
     (differenceInDays(endDate1, startDate1) > maxSelectedDay) && (item.selection.endDate = addDays(startDate1, maxSelectedDay));
     setRange([item.selection]);
-    !isViewDesktop() && console.log("mobile");
-
     !isViewDesktop() && _$('.rdrDayNumber').scrollIntoView({ behavior: 'smooth', block: 'start' });
-
   }
 
+  // Toggle disabled buttons for beginning
   const navButtons = $all('.rdrMonthAndYearWrapper button') || []
-  isSameMonth(new Date, startDate) && navButtons[0]?.classList.add("disabled")
+  if (!isSameMonth(new Date, startDate)) {
+    navButtons[0]?.classList.remove("disabled");
+    _$('.btn-reset-calendar ')?.classList.remove("disabled")
+  } else {
+    navButtons[0]?.classList.add("disabled")
+  }
 
+  // Click events on Pre and Next months of calendar
   navButtons.forEach((item: any) => {
     item.addEventListener("click", (e: any) => {
       const resetBtn = _$('.btn-reset-calendar')
