@@ -7,7 +7,7 @@ const Calendar = ({ range, handleSelect, viewCalendarDesktop }: any) => {
       editableDateInputs={false}
       moveRangeOnFirstSelection={false}
       ranges={range}
-      months={2}
+      months={viewCalendarDesktop ? 2 : 12}
       direction="horizontal"
       className="calendarElement"
       minDate={new Date()}
@@ -16,7 +16,6 @@ const Calendar = ({ range, handleSelect, viewCalendarDesktop }: any) => {
       rangeColors={['#4B2A0B ', '#4B2A0B ', '#4B2A0B ']}
       fixedHeight={true}
       showDateDisplay={false}
-      scroll={viewCalendarDesktop ? { enabled: false } : { enabled: true }}
     />
   )
 }

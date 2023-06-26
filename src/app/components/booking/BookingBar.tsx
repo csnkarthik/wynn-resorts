@@ -19,6 +19,9 @@ const BookingBar = () => {
   const [open, setOpen] = useState(false);
   const refOne = useRef(null);
 
+  // const useMountEffect = (fun: any) => useEffect(fun, []);
+  // const executeScroll = () => refOne?.current?.scrollIntoView();
+  // useMountEffect(executeScroll);
   const [range, setRange] = useState([{
     startDate: new Date(),
     endDate: addDays(new Date(), 1),
@@ -65,6 +68,10 @@ const BookingBar = () => {
     !isCurrMonth && resetBtn?.classList.remove("disabled");
     (differenceInDays(endDate1, startDate1) > maxSelectedDay) && (item.selection.endDate = addDays(startDate1, maxSelectedDay));
     setRange([item.selection]);
+    !isViewDesktop() && console.log("mobile");
+
+    !isViewDesktop() && _$('.rdrDayNumber').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
   }
 
   const navButtons = $all('.rdrMonthAndYearWrapper button') || []
@@ -99,7 +106,7 @@ const BookingBar = () => {
     <div className="calendarWrap">
       {open &&
         <div className="date-picker open">
-          <div ref={refOne} className="container ">
+          <div ref={refOne} className={viewCalendarDesktop ? "container" : "container mobile"}>
             <Calendar range={range} handleSelect={handleSelect} viewCalendarDesktop={viewCalendarDesktop} />
 
             {/* For Calendar Desktop */}
