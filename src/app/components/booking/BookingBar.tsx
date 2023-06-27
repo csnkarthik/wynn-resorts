@@ -1,23 +1,18 @@
+'use client'
 import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useRef, useState } from 'react'
-import { DateRangePicker } from 'react-date-range'
-import format from 'date-fns/format'
-import { addDays } from 'date-fns'
-import { _$ } from "@/lib/utils"
-import { disableStatusBooking, validateBookingDate, handleSelect, handleOpenCalendar, handleReset, urlWLV } from "@/lib/utils/booking"
+import { addDays, differenceInDays, addMonths, isSameMonth } from 'date-fns'
+import { _$, $all, isViewDesktop } from "@/lib/utils"
+import Calendar from "./Calendar"
+import Ctas from "./Ctas"
+import CheckInOut from "./CheckInOut"
+import RoomsGuess from "./RoomsGuess"
+import CheckAvailabilityBtn from "./CheckAvailabilityBtn"
+import FooterText from "./FooterText"
 
 const BookingBar = () => {
-  const elGuessMinus = _$('.btn-guess-minus')?.classList
-  const elRoomMinus = _$('.btn-room-minus')?.classList
-  const elGuessPlus = _$('.btn-guess-plus')?.classList
-  const elRoomPlus = _$('.btn-room-plus')?.classList
-  const elBtnReset = _$('.btn-reset-calendar')?.classList
-  const elCheckIn = _$('.check-in')?.classList
-  const elCheckOut = _$('.check-out')?.classList
-
-
-
+  const [viewCalendarDesktop, setViewCalendarDesktop] = useState(true)
   const [diffInDays, setDiffInDays] = useState(1);
   const [room, setRoom] = useState(1);
   const [guess, setGuess] = useState(2);
@@ -27,101 +22,138 @@ const BookingBar = () => {
   const [range, setRange] = useState([{
     startDate: new Date(),
     endDate: addDays(new Date(), 1),
-    key: 'selection'
+    key: 'selection',
   }])
 
+  const { startDate, endDate } = range[0];
+
   useEffect(() => {
-    let selectedDate = (endDate: any) => {
-      return ({
-        startDate: range[0].startDate,
-        endDate: endDate,
-        key: 'selection'
-      })
+    // set the checkOut is next day if not choosing on calendar when Close Calendar
+    (!open && startDate == endDate) && setRange([{
+      startDate: startDate,
+      endDate: addDays(startDate, 1),
+      key: 'selection',
+    }])
+
+    // Check mobile or desktop
+    isViewDesktop() ? setViewCalendarDesktop(true) : setViewCalendarDesktop(false);
+    if (open) {
+      document.body.style.overflowY = "hidden"
+      document.addEventListener("keydown", (e) => hideOnEscape(e.target), true)
+      document.addEventListener("click", (e) => { hideOnClickOutside(e.target) }, true)
+      setDiffInDays(differenceInDays(endDate, startDate))
+    } else {
+      document.body.style.overflowY = "auto"
+    }
+  }, [setOpen, refOne, open, startDate, endDate, range, viewCalendarDesktop])
+
+  // Select the date
+  const handleSelect = (item: any) => {
+    const maxSelectedDay = 14;
+    const elCheckIn = _$('.check-in')?.classList;
+    const elCheckOut = _$('.check-out')?.classList;
+    const preButton = _$('.rdrMonthAndYearWrapper >button');
+    const resetBtn = _$('.btn-reset-calendar')
+
+    let startDate1 = item.selection.startDate;
+    let endDate1 = item.selection.endDate;
+    let isCurrMonth = isSameMonth(new Date, startDate1);
+
+    elCheckIn?.toggle('active');
+    elCheckOut?.toggle('active');
+
+    // Toggle disabled buttons
+    if (!isCurrMonth) {
+      preButton?.classList.add("disabled");
+    } else {
+      preButton?.classList.remove("disabled");
+      resetBtn?.classList.remove("disabled");
     }
 
-    disableStatusBooking(guess, room, elGuessMinus, elRoomMinus, elGuessPlus, elRoomPlus)
-    validateBookingDate(range[0].endDate, range[0].startDate, setDiffInDays, setRange, selectedDate, elBtnReset, setOpen, refOne, open)
+    (differenceInDays(endDate1, startDate1) > maxSelectedDay) && (item.selection.endDate = addDays(startDate1, maxSelectedDay));
+    setRange([item.selection]);
+    !isViewDesktop() && _$('.rdrDayNumber').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 
-  }, [range, open, guess, room, elCheckIn, elCheckOut, elGuessMinus, elRoomMinus, elGuessPlus, elRoomPlus, elBtnReset])
+  // Toggle disabled buttons for beginning
+  const navButtons = $all('.rdrMonthAndYearWrapper button') || []
+  if (!isSameMonth(new Date, startDate)) {
+    navButtons[0]?.classList.remove("disabled");
+    _$('.btn-reset-calendar ')?.classList.remove("disabled")
+  } else {
+    navButtons[0]?.classList.add("disabled")
+  }
+
+  // Click events on Pre and Next months of calendar
+  navButtons.forEach((item: any) => {
+    item.addEventListener("click", (e: any) => {
+      const resetBtn = _$('.btn-reset-calendar')
+      const currMonthDom = _$('.rdrMonths >.rdrMonth >.rdrMonthName');
+      let isCurrMonth = isSameMonth(addMonths(new Date, 1), new Date(currMonthDom?.textContent));
+      !isCurrMonth ? resetBtn?.classList.remove("disabled") : resetBtn?.classList.add("disabled");
+      (e.target == navButtons[0]) ? isCurrMonth && navButtons[0]?.classList.add("disabled") : navButtons[0]?.classList.remove("disabled");
+    })
+  })
+
+  // hide dropdown on ESC press
+  const hideOnEscape = (el: any) => {
+    if (el.key === "Escape") {
+      setOpen(false)
+    }
+  }
+
+  // Hide dropdown on outside click
+  const hideOnClickOutside = (el: any) => {
+    const curr: any = refOne?.current
+    if ((curr && !curr.contains(el))) {
+      setOpen(false)
+    }
+  }
+
   return (
     <div className="calendarWrap">
       {open &&
         <div className="date-picker open">
-          <div ref={refOne} className="container ">
-            <button className="btn-close-calendar" onClick={() => setOpen(open => !open)}><i className="bi bi-x-circle"></i></button>
-            <DateRangePicker
-              onChange={(item) => handleSelect(item, setRange, elCheckIn, elCheckOut)}
-              editableDateInputs={false}
-              moveRangeOnFirstSelection={false}
-              ranges={range}
-              months={2}
-              direction="horizontal"
-              className="calendarElement"
-              minDate={new Date()}
-              showMonthAndYearPickers={false}
-              dateDisplayFormat={'MM/dd/yyyy'}
-              rangeColors={['#4B2A0B ', '#4B2A0B ', '#4B2A0B ']}
-              fixedHeight={true}
-            />
-            <div className="header-text">{diffInDays}-night stay</div>
-            <p className="footer-text">You only able to book a maximum of 14 nights</p>
-            <button className="btn btn-secondary btn-reset-calendar disabled" onClick={() => handleReset(range, setRange, elBtnReset, elCheckOut, elCheckIn)}>Reset</button>
+          <div ref={refOne} className={viewCalendarDesktop ? "container" : "container mobile"}>
+            <Calendar range={range} handleSelect={handleSelect} viewCalendarDesktop={viewCalendarDesktop} />
+
+            {/* For Calendar Desktop */}
+            {viewCalendarDesktop && <>
+              <div className="header-text">{diffInDays}-night stay</div>
+              <FooterText />
+              <Ctas setRange={setRange} setDiffInDays={setDiffInDays} setOpen={setOpen} />
+            </>}
+
+            {/* For Calendar Mobile */}
+            {!viewCalendarDesktop && <div className="calendar">
+              <div className="footerCalendar">
+                <div className="header-text">{diffInDays}-night stay</div>
+                <Ctas range={range} setRange={setRange} setDiffInDays={setDiffInDays} setOpen={setOpen} />
+                <div className="booking-bar room-guess">
+                  <RoomsGuess room={room} setRoom={setRoom} guess={guess} setGuess={setGuess} />
+                </div>
+                <FooterText />
+              </div>
+            </div>}
           </div>
         </div>
       }
+
+      {/* For Booking Bar */}
       <div className="booking-bar">
         <div className="container">
           <div className="row booking-wrap">
             <div className="col logo">
-              <Link aria-label="Wynn Las Vegas Private Access" href="/"> <Image src="/images/logo.gif" width="130" height="70" alt="Wynn Las Vegas" /></Link>
+              <Link aria-label="Wynn Las Vegas Private Access" href="/"><Image src="/images/logo.gif" width="130" height="70" alt="Wynn Las Vegas" /></Link>
             </div>
             <div className="col">
               <form className="booking-room">
-                <div className="check-in-out">
-                  <div className="check-in active">
-                    <label htmlFor="check-in">Check In</label>
-                    <input id="check-in" value={`${format(range[0].startDate, "MM/dd/yyyy")}`} readOnly onClick={() => handleOpenCalendar(setOpen, elCheckOut, elCheckIn)}></input>
-                  </div>
-                  <div className="check-out">
-                    <label htmlFor="check-out">Check Out</label>
-                    <input id="check-out" value={`${format(range[0].endDate, "MM/dd/yyyy")}`} readOnly onClick={() => handleOpenCalendar(setOpen, elCheckOut, elCheckIn)}></input>
-                  </div>
+                <CheckInOut startDate={startDate} endDate={endDate} setOpen={setOpen} open={open} />
+                {viewCalendarDesktop && <div className="room-guess">
+                  <RoomsGuess room={room} setRoom={setRoom} guess={guess} setGuess={setGuess} />
                 </div>
-                <div className="room-guess">
-                  <div className="room">
-                    <div className="room-numbers">
-                      <label htmlFor="room-numbers">Rooms</label>
-                      <div>
-                        <button className="icon-btn btn-room-minus disabled" onClick={(e: any) => {
-                          e.preventDefault();
-                          setRoom(room - 1)
-                        }}><i className="bi bi-dash-circle"></i></button>
-                        <input id="room-numbers" className="num-room-guess text-center" value={room} readOnly></input>
-                        <button className="icon-btn btn-room-plus" onClick={(e: any) => {
-                          e.preventDefault();
-                          setRoom(room + 1)
-                        }}><i className="bi bi-plus-circle"></i></button>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="guess-numbers">
-                    <label htmlFor="guess-numbers">Guests per room</label>
-                    <div className="text-center">
-                      <button className="icon-btn btn-guess-minus" onClick={(e: any) => {
-                        e.preventDefault();
-                        setGuess(guess - 1)
-                      }}><i className="bi bi-dash-circle"></i></button>
-                      <input id="guess-numbers" className="num-room-guess text-center" value={guess} readOnly></input>
-                      <button className="icon-btn btn-guess-plus" onClick={(e: any) => {
-                        e.preventDefault();
-                        setGuess(guess + 1)
-                      }}><i className="bi bi-plus-circle"></i></button>
-                    </div>
-                  </div>
-                </div>
-                <div className="cta">
-                  <Link className="btn btn-primary check-availability" href={`${urlWLV}&checkin=${format(range[0].startDate, "MM/dd/yyyy")}&checkout=${format(range[0].endDate, "MM/dd/yyyy")}&rooms=${room}&adults=${guess}`} target="_blank">check availability</Link>
-                </div>
+                }
+                <CheckAvailabilityBtn startDate={startDate} endDate={endDate} room={room} guess={guess} />
               </form>
             </div>
           </div>

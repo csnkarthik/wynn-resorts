@@ -147,6 +147,11 @@
     }
   }
 
+  .btn-primary {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+  }
+
   .btnReserve {
     position: absolute;
     top: 0px;

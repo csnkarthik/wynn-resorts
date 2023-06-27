@@ -1,21 +1,32 @@
-import { client } from '@/lib/contentful/client';
+import { client} from '@/lib/contentful/client';
 
+//Get all information of restaurants
 export async function getRestaurants() {
-  const res = await client.getEntries({ content_type: 'diningPage' })
-  return res.items;
+  return client.getEntries({'content_type': 'diningPage'})
+    .then(entries => entries.items)
+    .catch(console.error);
 }
 
+//Get content for Dining Page
 export async function getInfoDiningPage() {
-  const res = await client.getEntries({ content_type: 'diningListPage' })
-  return res.items[0].fields;
+  return client.getEntries({'content_type': 'diningListPage'})
+    .then(entries => entries.items[0].fields)
+    .catch(console.error);
 }
 
-export async function getMeuList() {
-  const res = await client.getEntries({ content_type: 'menuPage' })
-  return res.items;
-}
-
+//Get categories of the dining
 export async function getRestaurantsCategories() {
-  const res = await client.getEntries({ content_type: 'category' })
-  return res.items[0].fields;
+  return client.getEntries({'content_type': 'category'})
+    .then(entries => entries.items[0].fields)
+    .catch(console.error);
+}
+
+//Get detail of a restaurant
+export async function getRestaurant(params: any) {
+  return client.getEntries({
+    'content_type': 'diningPage',
+    'fields.slug': params.slug,
+  })
+    .then(entries => entries.items[0])
+    .catch(console.error);
 }

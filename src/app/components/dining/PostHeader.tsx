@@ -1,21 +1,22 @@
+"use client"
 
 import Image from 'next/image'
 import { _$, handleSticky, $id } from '@/lib/utils';
+import { format } from 'date-fns'
 
-
-const PostHeader = ({ restaurant, handleMenuClick }: any) => {
+const PostHeader = ({ restaurant }: any) => {
   const { name, desktopBanner, mobileBanner, subTitle, shortDescription, menu } = restaurant?.fields
 
   const handleReserve = (e: any) => {
     e.preventDefault();
     const reserveInfo = {
       restaurant: name,
-      startDate: new Date(),
+      startDate: format(new Date(), "MM/dd/yyyy"),
       people: "2 Guests",
       time: "5:00 PM"
     }
-
-    handleSticky()
+    // handleSticky()
+    alert(`Reserve table info "\n" Restaurant:${reserveInfo.restaurant}"\n" People:${reserveInfo.people}"\n" Date:${reserveInfo.startDate}"\n" Time:${reserveInfo.time}`)
   };
 
   return (
@@ -46,8 +47,8 @@ const PostHeader = ({ restaurant, handleMenuClick }: any) => {
               </h1>
               <div className="copy-wrap" tabIndex={0}>{shortDescription}</div>
               <div className='ctas'>
-                {menu && <button className='btn btn-secondary' id-menu={menu.sys.id} data-bs-toggle="modal" data-bs-target=".menuModal" onClick={handleMenuClick}>View Menu</button>}
-                <button className='btn btn-primary' data-bs-toggle="modal" data-bs-target=".reserveTableModal" onClick={handleReserve}>Reserve A Table</button>
+                {menu && <button className='btn btn-secondary' data-bs-toggle="modal" data-bs-target=".menuModal">View Menu</button>}
+                <button className='btn btn-primary' onClick={handleReserve}>Reserve A Table</button>
               </div>
             </div>
           </div>

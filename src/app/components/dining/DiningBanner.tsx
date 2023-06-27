@@ -1,23 +1,12 @@
+"use client"
 
 import Image from 'next/image'
 import ReserveATable from './ReserveATable'
-import { $all, handleSticky, _$ } from "@/lib/utils";
+import { _$ } from "@/lib/utils";
 
-const DiningBanner = ({ diningPage, diningDetail, bookings }: any) => {
+const DiningBanner = ({ diningPage, diningDetail }: any) => {
   const { desktopBanner, mobileBanner, description, headline } = diningPage
 
-  const handleReserve = (e: any) => {
-    e.preventDefault();
-    const all: any = $all('.data');
-    const newData = {
-      restaurant: all[0].value,
-      startDate: all[2].value,
-      people: all[1].value,
-      time: all[3].value,
-    };
-    (newData.restaurant === "Select A Restaurant") && _$('.invalid-feedback.restaurant').classList.add('d-block');
-    handleSticky()
-  }
   return (
     <>
       <section className="banner">
@@ -37,7 +26,7 @@ const DiningBanner = ({ diningPage, diningDetail, bookings }: any) => {
             height={mobileBanner?.fields.file.details.image.height}
           />
         </div>
-        <ReserveATable diningDetail={diningDetail} handleReserve={handleReserve} />
+        <ReserveATable diningDetail={diningDetail} />
       </section>
       <section className='headline'>
         <div className="container">

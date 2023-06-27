@@ -1,3 +1,5 @@
+"use client"
+
 import RichText from "../RichText"
 
 export const FAQItem = ({ item, i }: any) => {

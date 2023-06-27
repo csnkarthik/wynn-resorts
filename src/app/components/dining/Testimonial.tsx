@@ -1,3 +1,4 @@
+"use client"
 
 const Testimonial = ({ testimonial }: any) => {
   const { content, signature } = testimonial?.fields.testimonial.fields

@@ -4,12 +4,13 @@
   width: 100%;
   background-color: $white;
   box-shadow: 0px 3px 18px 3px rgba(119, 92, 61, 0.17);
-  z-index: 9999;
+  z-index: 20;
 
   @include media-size(desktop) {
     position: relative;
     bottom: auto;
     box-shadow: 0px 3px 18px 3px rgba(119, 92, 61, 0);
+
   }
 
   .booking-wrap {
@@ -49,10 +50,18 @@
         align-items: left;
         position: relative;
 
+        .room-guess {
+          display: none;
+        }
+
         @include media-size(desktop) {
           justify-content: flex-end;
           align-items: center;
           flex-flow: nowrap;
+
+          .room-guess {
+            display: flex;
+          }
         }
 
         >div {
@@ -245,12 +254,13 @@
       left: 0px;
       z-index: 9999;
       background-color: rgba(0, 0, 0, 0.6);
-      right: -150px;
+      height: 100vh !important;
+      width: 100%;
     }
 
     >.container {
       background-color: $white;
-      padding: 10px 25px 10px 25px;
+      padding: 50px 25px 10px 25px;
       box-shadow: 0px 1px 18px 3px rgba(119, 92, 61, 0.05);
       border-radius: 0px 0px 8px;
       max-width: 750px !important;
@@ -275,16 +285,27 @@
         width: 100%;
         top: 7px;
         left: 0px;
+        display: none;
 
         @include media-size(desktop) {
           width: calc(100% - 40px);
-          top: 30px;
+          top: 0px;
           left: 20px;
+          display: flex;
         }
 
         button {
           background-color: transparent;
           @include transition(all);
+
+          &.disabled {
+            opacity: 0.2;
+            pointer-events: none;
+
+            &:hover {
+              border-color: $gray400;
+            }
+          }
 
           i {
             pointer-events: none;
@@ -371,7 +392,6 @@
       }
 
       .rdrDateRangePickerWrapper {
-        margin-top: 30px;
         margin-bottom: 10px;
         width: 100%;
 
@@ -395,7 +415,6 @@
     }
 
     .rdrDefinedRangesWrapper,
-    .rdrDateDisplayWrapper,
     .rdrMonthAndYearPickers {
       display: none;
     }
@@ -410,24 +429,6 @@
       cursor: not-allowed;
     }
 
-    .btn-close-calendar {
-      position: absolute;
-      right: 5px;
-      top: 5px;
-      border: 0px;
-      background-color: transparent;
-      @include transition(all);
-
-      &:hover {
-        transform: scale(1.05)
-      }
-
-      i {
-        @include font-size($font-size-21);
-        color: $black;
-      }
-    }
-
     .footer-text {
       text-align: left;
       @include font-size($font-size-11);
@@ -440,27 +441,39 @@
       }
     }
 
-    .btn-reset-calendar {
-      min-width: 0px;
+    .cta-footer {
       position: absolute;
-      right: -15px;
-      bottom: 10px;
-      padding: 5px 10px;
-      @include font-size($font-size-11);
+      right: -30px;
+      top: 3px;
+      bottom: auto;
 
       @include media-size(desktop) {
         right: 20px;
+        top: auto;
         bottom: 20px;
+      }
+
+      .btn {
+        min-width: 0px;
+        @include font-size($font-size-11);
+        padding: 5px 10px;
+        margin-left: 10px;
       }
     }
 
     .header-text {
       text-align: left;
+      margin-bottom: 10px;
+
       @include font-size($font-size-14);
       font-family: $font-avenir;
       text-transform: uppercase;
       max-width: 130px;
       margin-top: 10px;
+
+      @include media-size(desktop) {
+        margin-bottom: 0px;
+      }
     }
   }
 
@@ -492,15 +505,21 @@
     }
   }
 
+  .rdrDateRangePickerWrapper {
+    height: calc(100vh - 310px);
+    max-height: 560px;
+    overflow-y: auto;
+
+    @include media-size(desktop) {
+      height: auto;
+      max-height: auto;
+      overflow-y: none;
+    }
+  }
+
   .calendar {
     position: relative;
     padding-bottom: 100px;
-
-    .rdrDateRangePickerWrapper {
-      height: calc(100vh - 310px);
-      max-height: 560px;
-      overflow-y: auto;
-    }
 
     .footerCalendar {
       position: absolute;
@@ -520,5 +539,9 @@
     width: 220px;
     display: flex;
     justify-content: space-between;
+  }
+
+  .btn-secondary.disabled {
+    border-color: $gray400 !important;
   }
 }
