@@ -5,9 +5,11 @@ import Slider from 'react-slick'
 import Link from "next/link";
 import { _$, $all } from "@/lib/utils";
 import { useState } from "react";
+import { useRouter } from 'next/navigation'
 
 //Render Item of Carousel
 export const RecommendedItems = ({ pic, i }: any) => {
+  const router = useRouter()
 
   const { mobileBanner, name } = pic?.fields
   return (
@@ -39,7 +41,7 @@ export const Content = ({ title, description, slug, externalLink, i, idMenu, han
       </div>
       <div className="ctas">
         <button className="btn btn-secondary" id-menu={idMenu} data-bs-toggle="modal" data-bs-target=".menuModal" onClick={handleMenuClick}>View Menu</button>
-        <Link className="btn btn-primary" href={url}>View Detail</Link>
+        <a href={url} aria-label="View Detail" className="btn btn-primary" >View Detail</a>
       </div>
     </div>
   )
