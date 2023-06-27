@@ -6,23 +6,6 @@
   box-shadow: 0px 3px 18px 3px rgba(119, 92, 61, 0.17);
   z-index: 20;
 
-  // &.desktop {
-  //   display: none;
-  //   z-index: 20;
-
-  //   @include media-size(desktop) {
-  //     display: block;
-  //   }
-  //}
-
-  // &.mobile {
-  //   display: block;
-
-  //   @include media-size(desktop) {
-  //     display: none;
-  //   }
-  // }
-
   @include media-size(desktop) {
     position: relative;
     bottom: auto;
@@ -556,5 +539,9 @@
     width: 220px;
     display: flex;
     justify-content: space-between;
+  }
+
+  .btn-secondary.disabled {
+    border-color: $gray400 !important;
   }
 }

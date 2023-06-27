@@ -8,7 +8,6 @@ const Ctas = ({ setRange, setDiffInDays, setOpen }: any) => {
       startDate: new Date(),
       endDate: addDays(new Date(), 1),
       key: 'selection'
-
     }]);
     setDiffInDays(1)
     _$('.btn-reset-calendar ')?.classList.add("disabled")
