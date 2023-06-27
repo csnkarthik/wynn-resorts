@@ -20,7 +20,7 @@
     "incremental": true,
     // "rootDir": "src",
     "paths": {
-      "@/*": ["./src/app/*"],
+         "@/*": ["./src/app/*"],
     },
     "plugins": [
       {
@@ -33,7 +33,7 @@
     "./src/**/*.ts",
     "./src/**/*.tsx",
     ".next/types/**/*.ts"
-  ],
+, "src/app/lib/utils/dining.js"  ],
   "exclude": [
     "node_modules"
   ]

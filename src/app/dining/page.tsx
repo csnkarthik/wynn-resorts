@@ -66,4 +66,5 @@ const Dining = async () => {
   )
 }
 
+
 export default Dining

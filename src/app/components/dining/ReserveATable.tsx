@@ -3,13 +3,14 @@ import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
 import Link from "next/link";
-import { format } from "date-fns"
+import { format } from "date-fns";
 import { $all, handleSticky, _$, partySize, timeList } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 const ReserveATable = ({ diningDetail }: any) => {
   // Data
   const restaurantList: any = []
-
+  const router = useRouter()
   diningDetail?.map((restaurant: any) => restaurantList.push(restaurant.fields.name));
 
   const [restaurant, setRestaurant] = useState("Select A Restaurant");
@@ -41,7 +42,7 @@ const ReserveATable = ({ diningDetail }: any) => {
     setReserveInfo(newData);
     (restaurant === "Select A Restaurant") && _$('.invalid-feedback.restaurant').classList.add('d-block');
     handleSticky();
-    console.log('Reserve table Info:', newData)
+    router.push("/dining/resevations")
   };
   return (
     <>
@@ -78,7 +79,9 @@ const ReserveATable = ({ diningDetail }: any) => {
               </ul>
               <input className="data" name="time" type="hidden" defaultValue={time} />
             </div>
-            <button className="btn btn-primary btnReserve" onClick={handleReserve}>Reserve a Table</button>
+            <button className="btn btn-primary btnReserve" onClick={handleReserve}>
+              Reserve a Table
+            </button>
           </form>
         </div>
         <div className="invalid-feedback restaurant text-center mt-3">Please Select a restaurant</div>

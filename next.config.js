@@ -3,7 +3,9 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     //loader: 'custom',
-    domains: ['images.ctfassets.net'],
+    // hostname "prod-sc10-cd.azurewebsites.net"
+    domains: ['prod-sc10-cd.azurewebsites.net'],
+    // domains: ['images.ctfassets.net'],
   },
 }
 

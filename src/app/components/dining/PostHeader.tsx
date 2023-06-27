@@ -1,7 +1,7 @@
 
 import Image from 'next/image'
-import { _$, handleSticky, $id, reserveData } from '@/lib/utils';
-import moment from 'moment';
+import { _$, handleSticky, $id } from '@/lib/utils';
+
 
 const PostHeader = ({ restaurant, handleMenuClick }: any) => {
   const { name, desktopBanner, mobileBanner, subTitle, shortDescription, menu } = restaurant?.fields
@@ -10,11 +10,11 @@ const PostHeader = ({ restaurant, handleMenuClick }: any) => {
     e.preventDefault();
     const reserveInfo = {
       restaurant: name,
-      startDate: moment(new Date()).format('MM/DD/YYYY'),
+      startDate: new Date(),
       people: "2 Guests",
       time: "5:00 PM"
     }
-    reserveData(reserveInfo)
+
     handleSticky()
   };
 

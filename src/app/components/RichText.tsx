@@ -4,14 +4,14 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 const options = {
-  renderText: (text:string) => {
-    return text.split('\n').reduce((children, textSegment, index):any => {
+  renderText: (text: string) => {
+    return text.split('\n').reduce((children, textSegment, index): any => {
       return [...children, index > 0 && <br key={index} />, textSegment];
     }, [])
   },
 
   renderMark: {
-    [MARKS.CODE]: (text:any) => {
+    [MARKS.CODE]: (text: any) => {
       return (
         <pre>
           <code>{text}</code>
@@ -20,10 +20,10 @@ const options = {
     }
   },
   renderNode: {
-    [BLOCKS.PARAGRAPH]: (node:any, children:any) => {
+    [BLOCKS.PARAGRAPH]: (node: any, children: any) => {
       if (
-        node.content.find((item:any) =>
-          item.marks?.find((mark:any) => mark.type === 'code')
+        node.content.find((item: any) =>
+          item.marks?.find((mark: any) => mark.type === 'code')
         )
       ) {
         return (
@@ -38,7 +38,7 @@ const options = {
       return <p>{children}</p>
     },
 
-    [INLINES.ENTRY_HYPERLINK]: (node:any) => {
+    [INLINES.ENTRY_HYPERLINK]: (node: any) => {
       if (node.data.target.sys.contentType.sys.id === 'post') {
         return (
           <Link href={`/dining/${node.data.target.fields.slug}`}>
@@ -48,8 +48,8 @@ const options = {
       }
     },
 
-    [INLINES.HYPERLINK]: (node:any) => {
-      const text = node.content.find((item:any) => item.nodeType === 'text')?.value
+    [INLINES.HYPERLINK]: (node: any) => {
+      const text = node.content.find((item: any) => item.nodeType === 'text')?.value
       return (
         <a href={node.data.uri} target='_blank' rel='noopener noreferrer'>
           {text}
@@ -57,7 +57,7 @@ const options = {
       )
     },
 
-    [BLOCKS.EMBEDDED_ENTRY]: (node:any) => {
+    [BLOCKS.EMBEDDED_ENTRY]: (node: any) => {
       if (node.data.target.sys.contentType.sys.id === 'videoEmbed') {
         return (
           <iframe
@@ -72,7 +72,7 @@ const options = {
     },
 
 
-    [BLOCKS.EMBEDDED_ASSET]: (node:any) => {
+    [BLOCKS.EMBEDDED_ASSET]: (node: any) => {
       return (
         <Image
           src={'https:' + node.data.target.fields.file.url}
@@ -86,8 +86,8 @@ const options = {
   }
 }
 
-const RichText = ({ content }:any) => {
+const RichText = ({ content }: any) => {
   return <>{documentToReactComponents(content, options)}</>
 }
 
- export default RichText
+export default RichText
