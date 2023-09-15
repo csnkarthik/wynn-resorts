@@ -9,7 +9,7 @@ export const dynamicParams = true
 
 const DiningDetail = async ({ params }: { params: { slug: string } }) => {
   const restaurant = await getRestaurant(params)
-
+  console.log(params)
   return (
     <main>
       <PostHeader restaurant={restaurant} />

@@ -1,0 +1,238 @@
+.menu-page {
+    position: relative;
+
+    &::after {
+        content: "";
+        width: 80%;
+        height: 1px;
+        background-color: $gray400;
+        position: absolute;
+        bottom: -20px;
+        left: 11%;
+        box-shadow: rgba(238, 235, 235, 0.56) 0px 22px 70px 4px;
+
+        @include media-size(desktop) {
+            width: 70%;
+            left: 15%;
+        }
+    }
+}
+
+.menu {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    gap: 10px;
+    margin-bottom: -20px;
+
+    &-icon {
+        font-size: $font-size-36;
+    }
+}
+
+.menu-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    @include media-size(desktop) {
+        flex-direction: row;
+    }
+
+    .main-menu {
+        position: relative;
+        margin-bottom: -10px;
+
+        @include media-size(desktop) {
+            margin-bottom: 0px;
+
+            &::after {
+                content: '';
+                width: 1px;
+                height: 25px;
+                background-color: $black;
+                position: absolute;
+                top: 4px;
+                right: 0;
+
+            }
+        }
+
+    }
+}
+
+.btn-link {
+    border: none;
+    color: $black;
+    font-weight: 700;
+    font-size: $font-size-16;
+    text-transform: capitalize;
+}
+
+.main {
+    color: $brown600;
+
+    &-title {
+        margin-bottom: 30px;
+
+        h3 {
+            font-family: $font-avenir-bold;
+            font-size: $font-size-24;
+            font-weight: 500;
+            text-align: center;
+            text-decoration: underline;
+        }
+    }
+
+    &-type-serve {
+        font-size: $font-size-24;
+        font-weight: 900;
+        font-family: $font-bigCaslon;
+    }
+
+    &-list {
+        border: 2px solid $brown600;
+        padding: 30px 20px;
+        margin-bottom: 40px;
+    }
+
+    .food {
+        &-name {
+            font-size: $font-size-16;
+            font-family: $font-bigCaslon;
+            font-weight: 500;
+
+        }
+
+        &-describion {
+            font-size: $font-size-14;
+            color: $gray700;
+        }
+    }
+
+    &-price {
+        font-size: $font-size-16;
+        font-family: $font-avenir-bold;
+        font-weight: 900;
+    }
+}
+
+///////////////////////////*************Information tab************//////////////
+.resturant {
+    margin-top: 30px;
+    margin-bottom: 20px !important;
+
+    &-text {
+        font-size: $font-size-16;
+        color: $gray700;
+        text-align: center;
+    }
+
+    .menu-page::after {
+        content: "";
+        background-color: $white;
+
+    }
+
+    &-source {
+        .hours {
+            display: flex;
+            justify-content: flex-start;
+            flex-direction: column;
+            align-items: center;
+            // margin-top: 20px;
+            // margin-bottom: -20px;
+
+            &-icon {
+                font-size: $font-size-24;
+                text-align: center;
+            }
+
+            &-list {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+                align-items: flex-start;
+                justify-content: center;
+            }
+
+            &-bolder {
+                font-weight: 700;
+            }
+
+            .line-height-lower {
+                line-height: 8px;
+            }
+
+            .qouted-text {
+                color: $gray700;
+            }
+        }
+    }
+}
+
+.two-column {
+    &-title {
+        text-align: center;
+        font-family: $font-bigCaslon;
+        text-transform: capitalize;
+
+    }
+
+    &-image {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16/9;
+    }
+
+    &-text {
+        padding: 0px;
+        text-align: left;
+        margin-top: 40px;
+        max-width: 85%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        @include media-size(desktop) {
+            padding: 0px 10px;
+            text-align: left;
+            margin-top: 0px;
+        }
+    }
+}
+
+.three-column {
+    &-image-holder {
+        // max-width: 350px;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;
+        max-width: 85%;
+
+        .three-column-image {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16/9;
+
+        }
+
+        @include media-size(desktop) {
+            max-width: 100%;
+            height: auto;
+        }
+    }
+
+    // &-image {
+    //     width: 100%;
+    //     height: auto;
+    // }
+
+    // @include media-size(desktop) {
+    //     width: 33.3%;
+    //     height: auto;
+    // }
+}

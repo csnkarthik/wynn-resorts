@@ -34,13 +34,14 @@ function SecondTimeAvaiable({ selectedTime, diningList }: { selectedTime: Time, 
     console.log(selectedTime)
     return (
         <Fragment>
-            <HeroImage imageDesktop={findResturant?.desktop_hero_image} />
-            <AddReservationConfirm
+            <h1>teston</h1>
+            {/* /    <HeroImage imageDesktop={findResturant?.desktop_hero_image} /> */}
+            {/* <AddReservationConfirm
                 resturantName={findResturant?.title}
                 dateSelected={selectedTime.AllAvaible}
                 timeSelected={selectedTime?.timerSelected}
                 guessNum={selectedTime?.guessNumber}
-            />
+            /> */}
         </Fragment>)
 }
 export default SecondTimeAvaiable;

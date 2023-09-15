@@ -1,4 +1,8 @@
+import { Fragment } from "react";
+import InfoRes from "./informationResturant/infoRes";
 function InfoList() {
-    return <p>test one info</p>
+    return <Fragment>
+        <InfoRes />
+    </Fragment>
 }
 export default InfoList;

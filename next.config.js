@@ -5,7 +5,7 @@ const nextConfig = {
     //loader: 'custom',
     // hostname "prod-sc10-cd.azurewebsites.net"
     domains: ['prod-sc10-cd.azurewebsites.net'],
-    // domains: ['images.ctfassets.net'],
+    //domains: ['images.ctfassets.net'],
   },
 }
 
